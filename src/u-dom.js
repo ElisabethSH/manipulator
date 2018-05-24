@@ -60,7 +60,7 @@ Util.parentNode = u.pn = function(node, _options) {
 	var exclude = "";
 	var include = "";
 
-	if(typeof(_options) == "object") {
+	if(obj(_options)) {
 		var _argument;
 		for(_argument in _options) {
 
@@ -89,7 +89,7 @@ Util.parentNode = u.pn = function(node, _options) {
 }
 
 
-// Returns previous sibling, not counting text+comment nodes as siblings 
+// Returns previous sibling, not counting text+comment nodes as siblings
 // excludes nodes matched by exclude=css selector
 // includes nodes matched by include=css selector
 Util.previousSibling = u.ps = function(node, _options) {
@@ -101,7 +101,7 @@ Util.previousSibling = u.ps = function(node, _options) {
 	// TODO: Consider option to start over from end, if no prev is found
 	// var loop = false;
 
-	if(typeof(_options) == "object") {
+if(obj(_options)) {
 		var _argument;
 		for(_argument in _options) {
 
@@ -117,7 +117,7 @@ Util.previousSibling = u.ps = function(node, _options) {
 	// get include and exclude nodes if needed
 	var exclude_nodes = exclude ? u.qsa(exclude, node.parentNode) : [];
 	var include_nodes = include ? u.qsa(include, node.parentNode) : [];
-	
+
 	// get previousSibling using standard JS
 	node = node.previousSibling;
 
@@ -131,7 +131,7 @@ Util.previousSibling = u.ps = function(node, _options) {
 }
 
 
-// Returns next sibling, not counting text+comment nodes as siblings 
+// Returns next sibling, not counting text+comment nodes as siblings
 // excludes nodes matched by exclude=css selector
 // includes nodes matched by include=css selector
 Util.nextSibling = u.ns = function(node, _options) {
@@ -143,7 +143,7 @@ Util.nextSibling = u.ns = function(node, _options) {
 	// TODO: Consider option to start over, if no next is found
 	// var loop = false;
 
-	if(typeof(_options) == "object") {
+	if(obj(_options)) {
 		var _argument;
 		for(_argument in _options) {
 
@@ -173,7 +173,7 @@ Util.nextSibling = u.ns = function(node, _options) {
 
 
 
-// Get childnodes array with 
+// Get childnodes array with
 // excludes nodes matched by exclude=css selector
 // includes nodes matched by include=css selector
 Util.childNodes = u.cn = function(node, _options) {
@@ -181,7 +181,7 @@ Util.childNodes = u.cn = function(node, _options) {
 	var exclude = "";
 	var include = "";
 
-	if(typeof(_options) == "object") {
+	if(obj(_options)) {
 		var _argument;
 		for(_argument in _options) {
 
@@ -220,7 +220,7 @@ Util.childNodes = u.cn = function(node, _options) {
 Util.appendElement = u.ae = function(_parent, node_type, attributes) {
 	try {
 		// is node_type already DOM node
-		var node = (typeof(node_type) == "object") ? node_type : document.createElement(node_type);
+		var node = obj(node_type) ? node_type : document.createElement(node_type);
 		node = _parent.appendChild(node);
 
 		// add attributes
@@ -248,7 +248,7 @@ Util.appendElement = u.ae = function(_parent, node_type, attributes) {
 */
 Util.insertElement = u.ie = function(_parent, node_type, attributes) {
 	try {
-		var node = (typeof(node_type) == "object") ? node_type : document.createElement(node_type);
+		var node = obj(node_type) ? node_type : document.createElement(node_type);
 		node = _parent.insertBefore(node, _parent.firstChild);
 		// add attributes
 		if(attributes) {
@@ -280,7 +280,7 @@ Util.wrapElement = u.we = function(node, node_type, attributes) {
 			for(attribute in attributes) {
 				wrapper_node.setAttribute(attribute, attributes[attribute]);
 			}
-		}	
+		}
 		wrapper_node.appendChild(node);
 		return wrapper_node;
 	}
@@ -300,7 +300,7 @@ Util.wrapContent = u.wc = function(node, node_type, attributes) {
 			for(attribute in attributes) {
 				wrapper_node.setAttribute(attribute, attributes[attribute]);
 			}
-		}	
+		}
 		while(node.childNodes.length) {
 			wrapper_node.appendChild(node.childNodes[0]);
 		}
@@ -314,7 +314,7 @@ Util.wrapContent = u.wc = function(node, node_type, attributes) {
 	return false;
 }
 
-// get node textcontent shorthand 
+// get node textcontent shorthand
 // basically this is not needed for newer browsers, but required to align syntax for older browsers
 Util.textContent = u.text = function(node) {
 	try {
@@ -334,7 +334,7 @@ Util.clickableElement = u.ce = function(node, _options) {
 	node._use_link = "a";
 	node._click_type = "manual";
 
-	if(typeof(_options) == "object") {
+	if(obj(_options)) {
 		var _argument;
 		for(_argument in _options) {
 
